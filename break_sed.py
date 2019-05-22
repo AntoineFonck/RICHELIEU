@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 import os
-from collections import OrderedDict
-from itertools import product
+from random import randint
 
 def isPrime(n, k=5): # miller-rabin
-  from random import randint
   if n < 2: return False
   for p in [2,3,5,7,11,13,17,19,23,29]:
       if n % p == 0: return n == p
@@ -30,12 +28,10 @@ primetest = 30546392520695593897987598178350528154336823600657776351058012146820
 
 clear = lambda: os.system('clear')
 
-#print(mydivmod(modulustest, primetest))
 def testprime(prime1):
   if (isPrime(int(prime1, 16)) == True and mydivmod(modulus, int(prime1, 16)) == 0):
     return prime1
   else:
-#print(prime1)
     return "not yet\n"
 
 def replace_all(text, dic):
@@ -44,61 +40,30 @@ def replace_all(text, dic):
       print(test(text))
     return text
 
-SUBSTITUTIONS = {
-    "7f" : "fb",
-    "f4": "12",
-    "16": "54",
-    "a4" : "57",
-    "b5" : "cd"
-}
-
-
-
-#tmp = prime1.replace(":", "")
-#print(int(tmp, 16))
-
 indexes = []
 replacements = ["fb", "57", "cd", "12", "fb", "fb", "57", "57", "cd", "54", "fb"]
 replacements2 = ["7f", "a4", "b5", "f4", "7f", "7f", "a4", "a4", "b5", "16", "7f"]
-#replacements2.reverse()
 
 test = [i for i in range(len(prime1)) if prime1[i:].startswith(("7f", "f4", "16", "a4", "b5"))]
 for i in test:
   indexes.append(int(i))
-for i in indexes:
-  print(prime1[i],prime1[i + 1], sep="")
-  print(i)
+print(mydivmod(837849563862443268467145186974119695264713699736869090645354954749227901572347301978135797019317859500555501198030540582269024532041297110543579716921121054608494680063992435808708593796476251796064060074170458193997424535149535571009862661106986816844991748325991752241516736019840401840150280563780565210071876568736454876944081872530701199426927496904961840225828224638335830986649773182889291953429581550269688392460126500500241969200245489815778699333733762961281550873031692933566002822719129034336264975002130651771127313980758562909726233111335221426610990708111420561543408517386750898610535272480495075060087676747037430993946235792405851007090987857400336566798760095401096997696558611588264303087788673650321049503980655866936279251406742641888332665054505305697841899685165810087938256696223326430000379461379116517951965921710056451210314300437093481577578273495492184643002539393573651797054497188546381723478952017972346925020598375000908655964982541016719356586602781209943943317644547996232516630476025321795055805235006790200867328602560320883328523659710885314500874028671969578391146701739515500370268679301080577468316159102141953941314919039404470348112690214065442074200255579004452618002777227561755664967507, 0x00fb40dc44ba03d15342f75908e0f9300596644ade94685e08e28c9ab1640c2f62c29ab9a239824b9ebeeb76ae6d8721a35e9ed98d7e57383e590934a578cdf72e895d5c3752eafdf631ccbad2d960e4451d6776d21f129c9dc9b1904551edd2fbddb674b499fbb10ad9b7c2be8ba407220a8e3a36ff6dc11d6393afcb4ec0479f65bfdfe3f05f1e98614574ec36a7a5b1f18d3d976b5a82490900080d9dc274574e30a139682f22347113aa3bf2204f8e10ebd4d09bb58cc2535f9d71130c0f21b66e133940d3a6b1eb74addd0a291481b190ade053f089c800fedcad5659fc281dc0cf5e08c0543324a352bbf3251043c373b8404ffc6b6b77bd5f2224eb7f15))
+print(0x00fb40dc44ba03d15342f75908e0f9300596644ade94685e08e28c9ab1640c2f62c29ab9a239824b9ebeeb76ae6d8721a35e9ed98d7e57383e590934a578cdf72e895d5c3752eafdf631ccbad2d960e4451d6776d21f129c9dc9b1904551edd2fbddb674b499fbb10ad9b7c2be8ba407220a8e3a36ff6dc11d6393afcb4ec0479f65bfdfe3f05f1e98614574ec36a7a5b1f18d3d976b5a82490900080d9dc274574e30a139682f22347113aa3bf2204f8e10ebd4d09bb58cc2535f9d71130c0f21b66e133940d3a6b1eb74addd0a291481b190ade053f089c800fedcad5659fc281dc0cf5e08c0543324a352bbf3251043c373b8404ffc6b6b77bd5f2224eb7f15.bit_length())
+while True:
+  for i, j, c in zip(indexes, replacements, replacements2):
+    test = prime1.replace(":", "")
+    if testprime(test) == prime1.replace(":", ""):
+      break
+    ran = randint(0,1)
+    if ran == 0:
+      prime1 = prime1[:i] + j + prime1[i+2:]
+    elif ran == 1:
+      prime1 = prime1[:i] + c + prime1[i+2:]
+  if testprime(test) != "not yet\n":
+    break
 
-indexes2 = indexes
-#indexes2.reverse()
-
-for i, j in zip(indexes, replacements):
-  test = prime1.replace(":", "")
-  print(testprime(test))
-  print(prime1)
-  prime1 = prime1[:i] + j + prime1[i+2:]
-
-for i, j in zip(indexes, replacements2):
-  test = prime1.replace(":", "")
-  print(testprime(test))
-  print(prime1)
-  prime1 = prime1[:i] + j + prime1[i+2:]
-
-#possibilities = [c + SUBSTITUTIONS.get(c, "") for c in range(len(prime1)) if prime1[i:].startswith(("7f", "f4", "16", "a4", "b5"))]
-#for i in possibilities:
-#  print(i)
-
-#def sub(text):
-#  possibilities = [c + SUBSTITUTIONS.get(c, "") for c in text]
-#  possibilities = [i + SUBSTITUTIONS.get(i, "") for i in range(len(text)) if text[i:].startswith(("7f", "f4", "16", "a4", "b5"))]
-   # 'spoils' -> ['s$5', 'p', 'o0', 'i!1|', 'l', 's$5']
-#  tmp = text.replace(":", "")
-#  for n in product(*possibilities):
-#    print(n)
-#  for subbed in product(*possibilities):
-#    print("".join(subbed))
-#    clear()
-
-#sub(prime1)
-#od = OrderedDict([("7f", "fb"), ("f4", "12"), ("16", "54"), ("a4", "57"), ("b5", "cd")])
-#replace_all(prime1, od)
+print("IT IS HERE=\n\n")
+print(test)
+print("\n\n")
+print(prime1)
+print("\n\n")
