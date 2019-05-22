@@ -31,7 +31,7 @@ primetest = 30546392520695593897987598178350528154336823600657776351058012146820
 clear = lambda: os.system('clear')
 
 #print(mydivmod(modulustest, primetest))
-def test(prime1):
+def testprime(prime1):
   if (isPrime(int(prime1, 16)) == True and mydivmod(modulus, int(prime1, 16)) == 0):
     return prime1
   else:
@@ -52,24 +52,49 @@ SUBSTITUTIONS = {
     "b5" : "cd"
 }
 
-tmp = prime1.replace(":", "")
-print(int(tmp, 16))
+
+
+#tmp = prime1.replace(":", "")
+#print(int(tmp, 16))
+
+indexes = []
+replacements = ["fb", "57", "cd", "12", "fb", "fb", "57", "57", "cd", "54", "fb"]
+replacements2 = ["7f", "a4", "b5", "f4", "7f", "7f", "a4", "a4", "b5", "16", "7f"]
+#replacements2.reverse()
 
 test = [i for i in range(len(prime1)) if prime1[i:].startswith(("7f", "f4", "16", "a4", "b5"))]
 for i in test:
+  indexes.append(int(i))
+for i in indexes:
+  print(prime1[i],prime1[i + 1], sep="")
   print(i)
 
-possibilities = [c + SUBSTITUTIONS.get(c, "") for c in range(len(prime1)) if prime1[i:].startswith(("7f", "f4", "16", "a4", "b5"))]
-for i in possibilities:
-  print(i)
+indexes2 = indexes
+#indexes2.reverse()
 
-def sub(text):
+for i, j in zip(indexes, replacements):
+  test = prime1.replace(":", "")
+  print(testprime(test))
+  print(prime1)
+  prime1 = prime1[:i] + j + prime1[i+2:]
+
+for i, j in zip(indexes, replacements2):
+  test = prime1.replace(":", "")
+  print(testprime(test))
+  print(prime1)
+  prime1 = prime1[:i] + j + prime1[i+2:]
+
+#possibilities = [c + SUBSTITUTIONS.get(c, "") for c in range(len(prime1)) if prime1[i:].startswith(("7f", "f4", "16", "a4", "b5"))]
+#for i in possibilities:
+#  print(i)
+
+#def sub(text):
 #  possibilities = [c + SUBSTITUTIONS.get(c, "") for c in text]
-  possibilities = [i + SUBSTITUTIONS.get(i, "") for i in range(len(text)) if text[i:].startswith(("7f", "f4", "16", "a4", "b5"))]
+#  possibilities = [i + SUBSTITUTIONS.get(i, "") for i in range(len(text)) if text[i:].startswith(("7f", "f4", "16", "a4", "b5"))]
    # 'spoils' -> ['s$5', 'p', 'o0', 'i!1|', 'l', 's$5']
-  tmp = text.replace(":", "")
-  for n in product(*possibilities):
-    print(n)
+#  tmp = text.replace(":", "")
+#  for n in product(*possibilities):
+#    print(n)
 #  for subbed in product(*possibilities):
 #    print("".join(subbed))
 #    clear()
