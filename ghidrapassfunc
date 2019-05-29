@@ -1,0 +1,45 @@
+ulong FUN_00400aae(byte *pbParm1)
+
+{
+  int iVar1;
+  undefined8 uVar2;
+  ulong uVar3;
+  byte bVar4;
+  long lVar5;
+  byte *pbVar6;
+  byte bVar7;
+  
+  lVar5 = -1;
+  pbVar6 = pbParm1;
+  do {
+    if (lVar5 == 0) break;
+    lVar5 = lVar5 + -1;
+    bVar4 = *pbVar6;
+    pbVar6 = pbVar6 + 1;
+  } while (bVar4 != 0);
+  uVar2 = 0;
+  if (lVar5 == -0x20) {
+    bVar4 = *pbParm1;
+    if (bVar4 != 0) {
+      pbVar6 = &DAT_004898c0;
+      pbParm1 = pbParm1 + 1;
+      uVar3 = 1;
+      bVar7 = 0x33;
+      do {
+        iVar1 = (int)uVar3;
+        uVar3 = 0;
+        if (iVar1 != 0) {
+          uVar3 = (ulong)((bVar4 ^ bVar7) == *pbVar6);
+        }
+        bVar7 = *pbVar6;
+        bVar4 = *pbParm1;
+        pbVar6 = pbVar6 + 1;
+        pbParm1 = pbParm1 + 1;
+      } while (bVar4 != 0);
+      return uVar3;
+    }
+    uVar2 = 1;
+  }
+  return uVar2;
+}
+
