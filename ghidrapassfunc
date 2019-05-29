@@ -1,45 +1,46 @@
-ulong FUN_00400aae(byte *pbParm1)
+ulong find_password(char *argv1)
 
 {
   int iVar1;
-  undefined8 uVar2;
+  undefined8 returnValue;
   ulong uVar3;
-  byte bVar4;
+  char charcpy;
   long lVar5;
-  byte *pbVar6;
-  byte bVar7;
+  char *argv1cpy;
+  char bVar7;
   
   lVar5 = -1;
-  pbVar6 = pbParm1;
+  //copy adress of argv1 in argv1cpy
+  argv1cpy = argv1;
   do {
     if (lVar5 == 0) break;
     lVar5 = lVar5 + -1;
-    bVar4 = *pbVar6;
-    pbVar6 = pbVar6 + 1;
-  } while (bVar4 != 0);
-  uVar2 = 0;
-  if (lVar5 == -0x20) {
-    bVar4 = *pbParm1;
-    if (bVar4 != 0) {
-      pbVar6 = &DAT_004898c0;
-      pbParm1 = pbParm1 + 1;
+    charcpy = *argv1cpy;
+    argv1cpy = argv1cpy + 1;
+  } while (charcpy != 0); //while charcpy != '\0'
+  returnValue = 0;
+  if (lVar5 == -0x20) { //checks if strlen(argv1) == 32
+    charcpy = *argv1;
+    if (charcpy != 0) {
+      argv1cpy = &DAT_004898c0;
+      argv1 = argv1 + 1;
       uVar3 = 1;
-      bVar7 = 0x33;
+      bVar7 = 0x33; //3 in ascii
       do {
         iVar1 = (int)uVar3;
         uVar3 = 0;
         if (iVar1 != 0) {
-          uVar3 = (ulong)((bVar4 ^ bVar7) == *pbVar6);
+          uVar3 = (ulong)((charcpy ^ bVar7) == *argv1cpy);
         }
-        bVar7 = *pbVar6;
-        bVar4 = *pbParm1;
-        pbVar6 = pbVar6 + 1;
-        pbParm1 = pbParm1 + 1;
-      } while (bVar4 != 0);
+        bVar7 = *argv1cpy;
+        charcpy = *argv1;
+        argv1cpy = argv1cpy + 1;
+        argv1 = argv1 + 1;
+      } while (charcpy != 0);
       return uVar3;
     }
-    uVar2 = 1;
+    returnValue = 1;
   }
-  return uVar2;
+  return returnValue;
 }
 
