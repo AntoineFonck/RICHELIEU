@@ -1,9 +1,9 @@
-ulong find_password(char *argv1)
+unsigned long find_password(char *argv1)
 
 {
   int iVar1;
-  undefined8 returnValue;
-  ulong uVar3;
+  unsigned long returnValue;
+  unsigned long uVar3;
   char charcpy;
   long lVar5;
   char *argv1cpy;
@@ -44,3 +44,25 @@ ulong find_password(char *argv1)
   return returnValue;
 }
 
+int main(int argc, char *argv[])
+{
+  uint uVar1;
+  ulong var_return;
+  
+  if (argc < 2) {
+    printf("usage : %s <mot de passe>\n", argv[0]);
+    var_return = 2;
+  }
+  else {
+    uVar1 = find_password(argv[1]); //"returnvalue" in find_password func
+    var_return = (ulong)uVar1;
+    if (uVar1 == 0) {
+      printf("Mauvais mot de passe");
+    }
+    else {
+      printf("Bravo ! Vous pouvez utiliser ce mot passe pour la suite ;-)");
+      var_return = 0;
+    }
+  }
+  return var_return;
+}
