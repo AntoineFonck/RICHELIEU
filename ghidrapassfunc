@@ -1,0 +1,46 @@
+ulong find_password(char *argv1)
+
+{
+  int iVar1;
+  undefined8 returnValue;
+  ulong uVar3;
+  char charcpy;
+  long lVar5;
+  char *argv1cpy;
+  char bVar7;
+  
+  lVar5 = -1;
+  //copy adress of argv1 in argv1cpy
+  argv1cpy = argv1;
+  do {
+    if (lVar5 == 0) break;
+    lVar5 = lVar5 + -1;
+    charcpy = *argv1cpy;
+    argv1cpy = argv1cpy + 1;
+  } while (charcpy != 0); //while charcpy != '\0'
+  returnValue = 0;
+  if (lVar5 == -0x20) { //checks if strlen(argv1) == 32
+    charcpy = *argv1;
+    if (charcpy != 0) {
+      argv1cpy = &DAT_004898c0;
+      argv1 = argv1 + 1;
+      uVar3 = 1;
+      bVar7 = 0x33; //3 in ascii
+      do {
+        iVar1 = (int)uVar3;
+        uVar3 = 0;
+        if (iVar1 != 0) {
+          uVar3 = (ulong)((charcpy ^ bVar7) == *argv1cpy);
+        }
+        bVar7 = *argv1cpy;
+        charcpy = *argv1;
+        argv1cpy = argv1cpy + 1;
+        argv1 = argv1 + 1;
+      } while (charcpy != 0);
+      return uVar3;
+    }
+    returnValue = 1;
+  }
+  return returnValue;
+}
+
